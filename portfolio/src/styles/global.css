@@ -1,25 +1,23 @@
 /* Global variables */
 :root {
-	/* Colors */
-	--gray-0: #090b11;
-	--gray-50: #141925;
-	--gray-100: #283044;
-	--gray-200: #3d4663;
-	--gray-300: #505d84;
-	--gray-400: #6474a2;
-	--gray-500: #8490b5;
-	--gray-600: #a3acc8;
-	--gray-700: #c3cadb;
-	--gray-800: #e3e6ee;
-	--gray-900: #f3f4f7;
-	--gray-999-basis: 0, 0%, 100%;
-	--gray-999_40: hsla(var(--gray-999-basis), 0.4);
-	--gray-999: #ffffff;
+	/* Catppuccin Latte Theme (Light) */
+	--gray-0: #eff1f5;
+	--gray-50: #e6e9ef;
+	--gray-100: #dce0e8;
+	--gray-200: #ccd0da;
+	--gray-300: #bcc0cc;
+	--gray-400: #acb0be;
+	--gray-500: #8c94a4;
+	--gray-600: #6c7086;
+	--gray-700: #585b70;
+	--gray-800: #44475a;
+	--gray-900: #303446;
+	--gray-999: #292c3c;
 
-	--accent-light: #c561f6;
-	--accent-regular: #7611a6;
-	--accent-dark: #1c0056;
-	--accent-overlay: hsla(280, 89%, 67%, 0.33);
+	--accent-light: #b4befe;
+	--accent-regular: #89b4fa;
+	--accent-dark: #74c7ec;
+	--accent-overlay: hsla(205, 86%, 81%, 0.33);
 	--accent-subtle-overlay: var(--accent-overlay);
 	--accent-text-over: var(--gray-999);
 
@@ -29,7 +27,7 @@
 	--gradient-stop-1: var(--accent-light);
 	--gradient-stop-2: var(--accent-regular);
 	--gradient-stop-3: var(--accent-dark);
-	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 150%);
+	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-0) 150%);
 	--gradient-accent: linear-gradient(
 		150deg,
 		var(--gradient-stop-1),
@@ -38,7 +36,7 @@
 	);
 	--gradient-accent-orange: linear-gradient(
 		150deg,
-		#ca7879,
+		#fe640b,
 		var(--accent-regular),
 		var(--accent-dark)
 	);
@@ -46,14 +44,14 @@
 
 	/* Shadows */
 	--shadow-sm:
-		0px 6px 3px rgba(9, 11, 17, 0.01), 0px 4px 2px rgba(9, 11, 17, 0.01),
-		0px 2px 2px rgba(9, 11, 17, 0.02), 0px 0px 1px rgba(9, 11, 17, 0.03);
+		0px 6px 3px rgba(48, 52, 70, 0.01), 0px 4px 2px rgba(48, 52, 70, 0.01),
+		0px 2px 2px rgba(48, 52, 70, 0.02), 0px 0px 1px rgba(48, 52, 70, 0.03);
 	--shadow-md:
-		0px 28px 11px rgba(9, 11, 17, 0.01), 0px 16px 10px rgba(9, 11, 17, 0.03),
-		0px 7px 7px rgba(9, 11, 17, 0.05), 0px 2px 4px rgba(9, 11, 17, 0.06);
+		0px 28px 11px rgba(48, 52, 70, 0.01), 0px 16px 10px rgba(48, 52, 70, 0.03),
+		0px 7px 7px rgba(48, 52, 70, 0.05), 0px 2px 4px rgba(48, 52, 70, 0.06);
 	--shadow-lg:
-		0px 62px 25px rgba(9, 11, 17, 0.01), 0px 35px 21px rgba(9, 11, 17, 0.05),
-		0px 16px 16px rgba(9, 11, 17, 0.1), 0px 4px 9px rgba(9, 11, 17, 0.12);
+		0px 62px 25px rgba(48, 52, 70, 0.01), 0px 35px 21px rgba(48, 52, 70, 0.05),
+		0px 16px 16px rgba(48, 52, 70, 0.1), 0px 4px 9px rgba(48, 52, 70, 0.12);
 
 	/* Text Sizes */
 	--text-sm: 0.875rem;
@@ -78,48 +76,48 @@
 }
 
 :root.theme-dark {
-	--gray-0: #ffffff;
-	--gray-50: #f3f4f7;
-	--gray-100: #e3e6ee;
-	--gray-200: #c3cadb;
-	--gray-300: #a3acc8;
-	--gray-400: #8490b5;
-	--gray-500: #6474a2;
-	--gray-600: #505d84;
-	--gray-700: #3d4663;
-	--gray-800: #283044;
-	--gray-900: #141925;
-	--gray-999-basis: 225, 31%, 5%;
-	--gray-999: #090b11;
+	/* Catppuccin Mocha Theme (Dark) */
+	--gray-0: #1e1e2e;
+	--gray-50: #181825;
+	--gray-100: #313244;
+	--gray-200: #45475a;
+	--gray-300: #585b70;
+	--gray-400: #6c7086;
+	--gray-500: #818596;
+	--gray-600: #9ca0b0;
+	--gray-700: #bac2de;
+	--gray-800: #cdd6f4;
+	--gray-900: #e6e9ef;
+	--gray-999: #f5e0dc;
 
-	--accent-light: #1c0056;
-	--accent-regular: #7611a6;
-	--accent-dark: #c561f6;
-	--accent-overlay: hsla(280, 89%, 67%, 0.33);
-	--accent-subtle-overlay: hsla(281, 81%, 36%, 0.33);
-	--accent-text-over: var(--gray-0);
+	--accent-light: #313244;
+	--accent-regular: #89b4fa;
+	--accent-dark: #74c7ec;
+	--accent-overlay: hsla(205, 86%, 81%, 0.33);
+	--accent-subtle-overlay: hsla(205, 86%, 81%, 0.33);
+	--accent-text-over: var(--gray-999);
 
 	--link-color: var(--accent-dark);
 
-	--gradient-stop-1: #4c11c6;
-	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 81%);
+	--gradient-stop-1: #45475a;
+	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-0) 81%);
 	--gradient-accent-orange: linear-gradient(
 		150deg,
-		#ca7879,
+		#fe640b,
 		var(--accent-regular),
 		var(--accent-light)
 	);
 	--gradient-stroke: linear-gradient(180deg, var(--gray-600), var(--gray-800));
 
 	--shadow-sm:
-		0px 6px 3px rgba(255, 255, 255, 0.01), 0px 4px 2px rgba(255, 255, 255, 0.01),
-		0px 2px 2px rgba(255, 255, 255, 0.02), 0px 0px 1px rgba(255, 255, 255, 0.03);
+		0px 6px 3px rgba(30, 30, 46, 0.01), 0px 4px 2px rgba(30, 30, 46, 0.01),
+		0px 2px 2px rgba(30, 30, 46, 0.02), 0px 0px 1px rgba(30, 30, 46, 0.03);
 	--shadow-md:
-		0px 28px 11px rgba(255, 255, 255, 0.01), 0px 16px 10px rgba(255, 255, 255, 0.03),
-		0px 7px 7px rgba(255, 255, 255, 0.05), 0px 2px 4px rgba(255, 255, 255, 0.06);
+		0px 28px 11px rgba(30, 30, 46, 0.01), 0px 16px 10px rgba(30, 30, 46, 0.03),
+		0px 7px 7px rgba(30, 30, 46, 0.05), 0px 2px 4px rgba(30, 30, 46, 0.06);
 	--shadow-lg:
-		0px 62px 25px rgba(255, 255, 255, 0.01), 0px 35px 21px rgba(255, 255, 255, 0.05),
-		0px 16px 16px rgba(255, 255, 255, 0.1), 0px 4px 9px rgba(255, 255, 255, 0.12);
+		0px 62px 25px rgba(30, 30, 46, 0.01), 0px 35px 21px rgba(30, 30, 46, 0.05),
+		0px 16px 16px rgba(30, 30, 46, 0.1), 0px 4px 9px rgba(30, 30, 46, 0.12);
 }
 
 html,
@@ -129,8 +127,8 @@ body {
 }
 
 body {
-	background-color: var(--gray-999);
-	color: var(--gray-200);
+	background-color: var(--gray-0);
+	color: var(--gray-900);
 	font-family: var(--font-body);
 	-webkit-font-smoothing: antialiased;
 	line-height: 1.5;
@@ -160,7 +158,7 @@ h5 {
 	line-height: 1.1;
 	font-family: var(--font-brand);
 	font-weight: 600;
-	color: var(--gray-100);
+	color: var(--gray-900);
 }
 
 h1 {
