@@ -1,0 +1,2 @@
+- [ ] switch anglais français
+- [ ] ajouter des dates aux projets
