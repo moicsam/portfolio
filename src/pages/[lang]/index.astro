@@ -39,19 +39,16 @@ const projects = (await getCollection("work", ({ data }) => data.lang === lang))
                 >
                     <div class="roles">
                         <Pill
-                            ><Icon icon="code" size="1.33em" /> {t(
-                                "home.role.developer",
-                            )}</Pill
+                            ><Icon icon="code" size="1.33em" />
+                            {t("home.role.developer")}</Pill
                         >
                         <Pill
-                            ><Icon icon="microphone-stage" size="1.33em" /> {t(
-                                "home.role.speaker",
-                            )}</Pill
+                            ><Icon icon="bicycle" size="1.33em" />
+                            {t("home.role.rider")}</Pill
                         >
                         <Pill
-                            ><Icon icon="pencil-line" size="1.33em" /> {t(
-                                "home.role.writer",
-                            )}</Pill
+                            ><Icon icon="cooking" size="1.33em" />
+                            {t("home.role.cook")}</Pill
                         >
                     </div>
                 </Hero>
@@ -89,22 +86,56 @@ const projects = (await getCollection("work", ({ data }) => data.lang === lang))
 
             <section class="section with-background bg-variant">
                 <header class="section-header stack gap-2 lg:gap-4">
-                    <h3>{t("home.mentions.title")}</h3>
-                    <p>{t("home.mentions.tagline")}</p>
+                    <h3>{t("home.competition.title")}</h3>
+                    <p>{t("home.competition.tagline")}</p>
                 </header>
 
                 <div class="gallery">
                     <Grid variant="small">
                         {
                             [
-                                "Medium",
-                                "BuzzFeed",
-                                "The Next Web",
-                                "awwwards.",
-                                "TechCrunch",
-                            ].map((brand) => (
+                                {
+                                    brand: "NorthSec",
+                                    date: "2026",
+                                    link: "https://nsec.io/",
+                                },
+                                {
+                                    brand: "Jdis Game",
+                                    date: "2026",
+                                    link: "https://www.youtube.com/watch?v=5UsOfppi4eI&t=1s",
+                                },
+                                {
+                                    brand: "@Hack",
+                                    date: "2026",
+                                    link: "https://athackctf.com/",
+                                },
+                                {
+                                    brand: "PolyPown",
+                                    date: "2026",
+                                    link: "https://pwn.polycyber.io/",
+                                },
+                                {
+                                    brand: "Coveo Blitz",
+                                    date: "2026",
+                                    link: "https://2027.blitz.codes/",
+                                },
+                                {
+                                    brand: "24h de l'info",
+                                    date: "2025",
+                                    link: "https://iut.univ-lyon1.fr/vie-etudiante/culture/24h-info-2025",
+                                },
+                            ].map(({ brand, date, link }) => (
                                 <li class="mention-card">
-                                    <p>{brand}</p>
+                                    <p>
+                                        <a
+                                            href={link}
+                                            style="font-weight: bold; font-size: 30px;"
+                                        >
+                                            {brand}
+                                        </a>
+                                        <br />
+                                        {date}
+                                    </p>
                                 </li>
                             ))
                         }

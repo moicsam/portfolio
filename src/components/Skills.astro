@@ -1,32 +1,30 @@
 ---
 import Icon from "./Icon.astro";
+import { useTranslations, localizePath, type Lang } from "../i18n/utils";
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
 ---
 
 <section class="box skills">
     <div class="stack gap-2 lg:gap-4">
-        <Icon
-            icon="terminal-window"
-            color="var(--accent-regular)"
-            size="2.5rem"
-        />
-        <h2>Full Stack</h2>
+        <Icon icon="linux" color="var(--accent-regular)" size="2.5rem" />
+        <h2>{t("skills.linux.title")}</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod.
+            {t("skills.linux.paragraph")}
         </p>
     </div>
     <div class="stack gap-2 lg:gap-4">
-        <Icon icon="trophy" color="var(--accent-regular)" size="2.5rem" />
-        <h2>Industry Leader</h2>
+        <Icon icon="flag" color="var(--accent-regular)" size="2.5rem" />
+        <h2>{t("skills.ctf.title")}</h2>
         <p>
-            Neque viverra justo nec ultrices dui. Est ultricies integer quis
-            auctor elit.
+            {t("skills.ctf.paragraph")}
         </p>
     </div>
     <div class="stack gap-2 lg:gap-4">
-        <Icon icon="strategy" color="var(--accent-regular)" size="2.5rem" />
-        <h2>Strategy-Minded</h2>
-        <p>Urna porttitor rhoncus dolor purus non enim praesent ornare.</p>
+        <Icon icon="open-source" color="var(--accent-regular)" size="2.5rem" />
+        <h2>{t("skills.open-source.title")}</h2>
+        <p>{t("skills.open-source.paragraph")}</p>
     </div>
 </section>
 
