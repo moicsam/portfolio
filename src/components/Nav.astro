@@ -2,13 +2,35 @@
 import Icon from "./Icon.astro";
 import type { iconPaths } from "./IconPaths";
 import ThemeToggle from "./ThemeToggle.astro";
+import { languages } from "./../i18n/ui";
+import {
+    useTranslations,
+    localizePath,
+    getLocalizedAlternate,
+    type Lang,
+} from "./../i18n/utils";
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
-    { label: "Home", href: "/" },
-    { label: "Work", href: "/work/" },
-    { label: "About", href: "/about/" },
+    { label: t("nav.home"), href: localizePath("/", lang) },
+    { label: t("nav.work"), href: localizePath("/work/", lang) },
+    { label: t("nav.about"), href: localizePath("/about/", lang) },
 ];
+
+/** Language switcher links, e.g. [{ code: "fr", label: "FR", href: "/fr/work/" }, ...] */
+const langLinks = Object.keys(languages).map((code) => ({
+    code,
+    label: languages[code as Lang],
+    href: getLocalizedAlternate(Astro.url, code as Lang),
+    active: code === lang,
+}));
 
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: {
@@ -37,7 +59,11 @@ const isCurrentPage = (href: string) => {
     let pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
     if (pathname.at(0) !== "/") pathname = "/" + pathname;
     if (pathname.at(-1) !== "/") pathname += "/";
-    return pathname === href || (href !== "/" && pathname.startsWith(href));
+    // A language root like "/fr/" or "/en/" should only match exactly —
+    // otherwise every page under that language ("/fr/about/", etc.)
+    // would also match via startsWith below.
+    const isLangRoot = /^\/[a-z]{2}\/$/.test(href);
+    return pathname === href || (!isLangRoot && pathname.startsWith(href));
 };
 ---
 
@@ -89,6 +115,20 @@ const isCurrentPage = (href: string) => {
                     ))
                 }
             </div>
+            <ul class="lang-switcher">
+                {
+                    langLinks.map(({ code, label, href, active }) => (
+                        <li>
+                            <a
+                                href={href}
+                                aria-current={active ? "page" : null}
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     </noscript>
     <div id="menu-content" hidden>
@@ -118,6 +158,21 @@ const isCurrentPage = (href: string) => {
                     ))
                 }
             </div>
+
+            <ul class="lang-switcher">
+                {
+                    langLinks.map(({ code, label, href, active }) => (
+                        <li>
+                            <a
+                                href={href}
+                                aria-current={active ? "page" : null}
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
 
             <div class="theme-toggle">
                 <ThemeToggle />
@@ -290,6 +345,38 @@ const isCurrentPage = (href: string) => {
         display: flex;
         align-items: center;
         height: calc(var(--icon-size) + 2 * var(--icon-padding));
+    }
+
+    .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: var(--text-sm);
+    }
+
+    .lang-switcher a {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 999rem;
+        color: var(--gray-300);
+        text-decoration: none;
+        transition:
+            color var(--theme-transition),
+            background-color var(--theme-transition);
+    }
+
+    .lang-switcher a:hover,
+    .lang-switcher a:focus {
+        color: var(--gray-100);
+        background-color: var(--accent-subtle-overlay);
+    }
+
+    .lang-switcher a[aria-current="page"] {
+        color: var(--accent-text-over);
+        background-color: var(--accent-regular);
     }
 
     @media (min-width: 50em) {

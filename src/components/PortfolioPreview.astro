@@ -6,9 +6,12 @@ interface Props {
 }
 
 const { data, id } = Astro.props.project;
+// `id` looks like "fr/bloom-box" or "en/nested/duvet-genius" — strip the
+// leading lang segment since the route already carries the lang prefix.
+const slug = id.replace(/^(fr|en)\//, "");
 ---
 
-<a class="card" href={`/work/${id}`}>
+<a class="card" href={`/${data.lang}/work/${slug}/`}>
     <div class="content">
         <h3 class="title">{data.title}</h3>
         <p class="description">{data.description}</p>

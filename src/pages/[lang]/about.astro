@@ -1,22 +1,25 @@
 ---
-import ContactCTA from "../components/ContactCTA.astro";
-import Hero from "../components/Hero.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { languages } from "../../i18n/ui";
+import { useTranslations, type Lang } from "../../i18n/utils";
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
 ---
 
-<BaseLayout
-    title="About | Jeanine White"
-    description="About Jeanine White Lorem Ipsum"
->
+<BaseLayout title={t("about.title")} description={t("about.description")}>
     <div class="stack gap-20">
         <main class="wrapper about">
-            <Hero
-                title="About"
-                tagline="Thanks for stopping by. Read below to learn more about myself and my background."
-            />
+            <Hero title={t("about.hero.title")} tagline={t("about.hero.tagline")} />
 
             <section>
-                <h2 class="section-title">Background</h2>
+                <h2 class="section-title">{t("about.section.background")}</h2>
                 <div class="content">
                     <p>
                         Lorem ipsum dolor sit amet, <a
@@ -46,13 +49,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 </div>
             </section>
             <section>
-                <h2 class="section-title">Education</h2>
+                <h2 class="section-title">{t("about.section.education")}</h2>
                 <div class="content">
                     <p>Corporis voluptates tenetur laudantium.</p>
                 </div>
             </section>
             <section>
-                <h2 class="section-title">Skills</h2>
+                <h2 class="section-title">{t("about.section.skills")}</h2>
                 <div class="content">
                     <p>officia unde omnis</p>
                 </div>
