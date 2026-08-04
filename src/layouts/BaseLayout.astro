@@ -1,0 +1,61 @@
+---
+// Learn about using Astro layouts:
+// https://docs.astro.build/en/basics/layouts/
+
+import Footer from "../components/Footer.astro";
+// Component Imports
+import MainHead from "../components/MainHead.astro";
+import Nav from "../components/Nav.astro";
+import { getLangFromUrl, getLocalizedAlternate } from "../i18n/utils";
+import { languages } from "../i18n/ui";
+
+interface Props {
+    title?: string | undefined;
+    description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<html lang={lang}>
+    <head>
+        <MainHead title={title} description={description} />
+        {
+            Object.keys(languages).map((altLang) => (
+                <link
+                    rel="alternate"
+                    hreflang={altLang}
+                    href={getLocalizedAlternate(Astro.url, altLang as keyof typeof languages)}
+                />
+            ))
+        }
+    </head>
+    <body>
+        <div class="stack backgrounds">
+            <Nav lang={lang} />
+            <slot />
+            <Footer />
+        </div>
+
+        <script>
+            // Add “loaded” class once the document has completely loaded.
+            addEventListener("load", () =>
+                document.documentElement.classList.add("loaded"),
+            );
+        </script>
+
+        <style>
+            .backgrounds {
+                min-height: 100%;
+                background-color: var(--gray-0);
+            }
+            @media (forced-colors: active) {
+                /* Deactivate custom backgrounds for high contrast users. */
+                .backgrounds {
+                    background: none;
+                }
+            }
+        </style>
+    </body>
+</html>

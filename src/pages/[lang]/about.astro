@@ -1,0 +1,219 @@
+---
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { languages } from "../../i18n/ui";
+import { useTranslations, type Lang } from "../../i18n/utils";
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+const competences = {
+    languages: [
+        t("about.skills.languages.french"),
+        t("about.skills.languages.english"),
+    ],
+    programming_languages: [
+        "Java",
+        "Rust",
+        "Python",
+        "C",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "PHP",
+    ],
+    frameworks: ["React", "Actix Web", "Diesel", "Flask", "Laravel"],
+    tools: [
+        "Git",
+        "GitHub Actions",
+        "Docker",
+        "Kafka",
+        "KrakenD",
+        "Jaeger",
+        "Zed Editor",
+        "JUnit",
+        "Pytest",
+        "Burp Suite",
+        "GDB",
+        "CyberChef",
+        "Ghidra",
+        "Wireshark",
+        "Syncthing",
+        "VirtManager",
+        "PostgreSQL",
+    ],
+    operating_systems: [
+        "Ubuntu",
+        "Kali Linux",
+        "Linux Mint",
+        "NixOS",
+        "Debian",
+    ],
+};
+
+const competenceLabels: Record<keyof typeof competences, string> = {
+    languages: t("about.skills.languages"),
+    programming_languages: t("about.skills.programming_languages"),
+    frameworks: t("about.skills.frameworks"),
+    tools: t("about.skills.tools"),
+    operating_systems: t("about.skills.operating_systems"),
+};
+---
+
+<BaseLayout title={t("about.title")} description={t("about.description")}>
+    <div class="stack gap-20">
+        <main class="wrapper about">
+            <Hero
+                title={t("about.hero.title")}
+                tagline={t("about.hero.tagline")}
+            />
+            <section>
+                <h2 class="section-title">{t("about.section.presentation")}</h2>
+                <p>{t("about.section.presentation.text")}</p>
+            </section>
+            <section>
+                <h2 class="section-title">{t("about.section.education")}</h2>
+                <ul>
+                    <li>
+                        <p>
+                            BUT informatique - IUT Robert Schuman - Strasbourg <br
+                            />
+                            2023-2026
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Baccalauréat en génie logiciel - Ecole de
+                            Technologie Supérieur (ETS) - Montréal <br /> 2025-2026
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Licence informatique - Faculté de Strasbourg <br /> 2026-2027
+                        </p>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2 class="section-title">{t("about.section.skills")}</h2>
+                <div class="content">
+                    <div class="skills-grid">
+                        {
+                            (
+                                Object.keys(competences) as Array<
+                                    keyof typeof competences
+                                >
+                            ).map((category) => (
+                                <div class="skills-category">
+                                    <h3>{competenceLabels[category]}</h3>
+                                    <ul class="skills-list">
+                                        {competences[category].map((skill) => (
+                                            <li>{skill}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <ContactCTA />
+    </div>
+</BaseLayout>
+
+<style>
+    .about {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+    }
+
+    img {
+        margin-top: 1.5rem;
+        border-radius: 1.5rem;
+        box-shadow: var(--shadow-md);
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        color: var(--gray-500);
+    }
+
+    .section-title {
+        grid-column-start: 1;
+        font-size: var(--text-xl);
+        color: var(--accent-regular);
+    }
+
+    .content {
+        grid-column: 2 / 4;
+    }
+
+    .content :global(a) {
+        text-decoration: 1px solid underline transparent;
+        text-underline-offset: 0.25em;
+        transition: text-decoration-color var(--theme-transition);
+    }
+
+    .content :global(a:hover),
+    .content :global(a:focus) {
+        text-decoration-color: currentColor;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .skills-category h3 {
+        font-size: var(--text-md);
+        color: var(--accent-regular);
+        margin-bottom: 0.5rem;
+    }
+
+    .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .skills-list li {
+        font-size: var(--text-sm);
+        color: var(--gray-200);
+        background-color: var(--gray-900, rgba(255, 255, 255, 0.05));
+        border: 1px solid var(--gray-800, rgba(255, 255, 255, 0.1));
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.65rem;
+    }
+
+    @media (min-width: 50em) {
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 60% 1fr;
+        }
+
+        .about > :global(:first-child) {
+            grid-column-start: 2;
+        }
+
+        section {
+            display: contents;
+            font-size: var(--text-lg);
+        }
+    }
+</style>

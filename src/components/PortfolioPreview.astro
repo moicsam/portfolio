@@ -1,0 +1,76 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+    project: CollectionEntry<"work">;
+}
+
+const { data, id } = Astro.props.project;
+// `id` looks like "fr/bloom-box" or "en/nested/duvet-genius" — strip the
+// leading lang segment since the route already carries the lang prefix.
+const slug = id.replace(/^(fr|en)\//, "");
+---
+
+<a class="card" href={`/${data.lang}/work/${slug}/`}>
+    <div class="content">
+        <h3 class="title">{data.title}</h3>
+        <p class="description">{data.description}</p>
+    </div>
+</a>
+
+<style>
+    .card {
+        display: block;
+        background: var(--gray-100);
+        border: 1px solid var(--gray-800);
+        border-radius: 0.75rem;
+        box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        color: var(--gray-900);
+        transition: box-shadow var(--theme-transition);
+        padding: 1rem;
+    }
+
+    .card:hover {
+        box-shadow: var(--shadow-md);
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        height: 100%;
+    }
+
+    .title {
+        margin: 0;
+        padding: 0;
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--accent-regular);
+    }
+
+    .description {
+        margin: 0;
+        padding: 0;
+        font-size: var(--text-sm);
+        color: var(--gray-500);
+        flex-grow: 1;
+    }
+
+    @media (min-width: 50em) {
+        .card {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            min-height: 22rem;
+        }
+
+        .title {
+            font-size: var(--text-xl);
+        }
+
+        .description {
+            font-size: var(--text-base);
+        }
+    }
+</style>
