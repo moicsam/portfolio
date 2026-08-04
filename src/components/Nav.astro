@@ -16,6 +16,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const base = import.meta.env.BASE_URL;
 
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
@@ -56,22 +57,26 @@ const isCurrentPage = (href: string) => {
     if (pathname.at(0) !== "/") pathname = "/" + pathname;
     if (pathname.at(-1) !== "/") pathname += "/";
     // A language root like "/fr/" or "/en/" should only match exactly —
-    // otherwise every page under that language ("/fr/about/", etc.)
+    // otherwise every page under that language ("fr/about/", etc.)
     // would also match via startsWith below.
-    const isLangRoot = /^\/[a-z]{2}\/$/.test(href);
-    return pathname === href || (!isLangRoot && pathname.startsWith(href));
+    const normalizedHref = href.replace(import.meta.env.BASE_URL, "");
+    const isLangRoot = /^\/[a-z]{2}\/$/.test(normalizedHref);
+    return (
+        pathname === normalizedHref ||
+        (!isLangRoot && pathname.startsWith(normalizedHref))
+    );
 };
 ---
 
 <nav>
     <div class="menu-header">
-        <a href="/" class="site-title">
+        <a href=`${base}/${lang}/` class="site-title">
             <Icon
                 icon="terminal-window"
                 color="var(--accent-regular)"
                 size="1.6em"
             />
-            Samuel Klein-Bichain
+            Sam KB
         </a>
         <menu-button>
             <template>

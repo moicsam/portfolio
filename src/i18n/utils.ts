@@ -4,9 +4,10 @@ export type Lang = keyof typeof ui;
 
 /** Extract the language from a URL, e.g. /en/work/ -> "en" */
 export function getLangFromUrl(url: URL): Lang {
-	const [, lang] = url.pathname.split('/');
-	if (lang in ui) return lang as Lang;
-	return defaultLang;
+    const pathWithoutBase = url.pathname.replace(import.meta.env.BASE_URL, '');
+    const [, lang] = pathWithoutBase.split('/');
+    if (lang in ui) return lang as Lang;
+    return defaultLang;
 }
 
 /** Returns a `t(key)` translation function bound to a given language. */
@@ -18,8 +19,8 @@ export function useTranslations(lang: Lang) {
 
 /** Prefix a path with the given language, e.g. ("work/", "en") -> "/en/work/" */
 export function localizePath(path: string, lang: Lang) {
-	const cleanPath = path.replace(/^\/+/, '');
-	return `/${lang}/${cleanPath}`;
+    const cleanPath = path.replace(/^\/+/, '');
+    return `${import.meta.env.BASE_URL}/${lang}/${cleanPath}`;
 }
 
 /**
@@ -27,13 +28,13 @@ export function localizePath(path: string, lang: Lang) {
  * in that language by swapping the leading /xx/ segment.
  */
 export function getLocalizedAlternate(url: URL, targetLang: Lang) {
-	const parts = url.pathname.split('/').filter(Boolean);
-	if (parts[0] in ui) {
-		parts[0] = targetLang;
-	} else {
-		parts.unshift(targetLang);
-	}
-	return '/' + parts.join('/') + '/';
+    const parts = url.pathname.replace(import.meta.env.BASE_URL, '').split('/').filter(Boolean);
+    if (parts[0] in ui) {
+        parts[0] = targetLang;
+    } else {
+        parts.unshift(targetLang);
+    }
+    return `${import.meta.env.BASE_URL}/${parts.join('/')}/`;
 }
 
 export { languages };
