@@ -11,53 +11,116 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
+
+const competences = {
+    languages: [
+        t("about.skills.languages.french"),
+        t("about.skills.languages.english"),
+    ],
+    programming_languages: [
+        "Java",
+        "Rust",
+        "Python",
+        "C",
+        "C++",
+        "JavaScript",
+        "TypeScript",
+        "SQL",
+        "PHP",
+    ],
+    frameworks: ["React", "Actix Web", "Diesel", "Flask", "Laravel"],
+    tools: [
+        "Git",
+        "GitHub Actions",
+        "Docker",
+        "Kafka",
+        "KrakenD",
+        "Jaeger",
+        "Zed Editor",
+        "JUnit",
+        "Pytest",
+        "Burp Suite",
+        "GDB",
+        "CyberChef",
+        "Ghidra",
+        "Wireshark",
+        "Syncthing",
+        "VirtManager",
+        "PostgreSQL",
+    ],
+    operating_systems: [
+        "Ubuntu",
+        "Kali Linux",
+        "Linux Mint",
+        "NixOS",
+        "Debian",
+    ],
+};
+
+const competenceLabels: Record<keyof typeof competences, string> = {
+    languages: t("about.skills.languages"),
+    programming_languages: t("about.skills.programming_languages"),
+    frameworks: t("about.skills.frameworks"),
+    tools: t("about.skills.tools"),
+    operating_systems: t("about.skills.operating_systems"),
+};
 ---
 
 <BaseLayout title={t("about.title")} description={t("about.description")}>
     <div class="stack gap-20">
         <main class="wrapper about">
-            <Hero title={t("about.hero.title")} tagline={t("about.hero.tagline")} />
-
+            <Hero
+                title={t("about.hero.title")}
+                tagline={t("about.hero.tagline")}
+            />
             <section>
-                <h2 class="section-title">{t("about.section.background")}</h2>
-                <div class="content">
-                    <p>
-                        Lorem ipsum dolor sit amet, <a
-                            href="https://astro.build/">Astro</a
-                        > makes people happy. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Proin nibh nisl condimentum
-                        id venenatis a condimentum vitae. Dapibus ultrices in iaculis
-                        nunc. Arcu odio ut sem nulla pharetra diam sit amet. Diam
-                        quis enim lobortis scelerisque fermentum dui faucibus in ornare.
-                    </p>
-                    <p>
-                        Arcu dui vivamus arcu felis bibendum ut tristique et
-                        egestas. Eget gravida cum sociis natoque penatibus. Cras
-                        fermentum odio eu feugiat pretium nibh. Proin nibh nisl
-                        condimentum id venenatis. Porta nibh venenatis cras sed
-                        felis eget velit. Id diam vel quam elementum pulvinar
-                        etiam non.
-                    </p>
-                    <p>
-                        Ultrices tincidunt arcu non sodales neque sodales ut.
-                        Sed enim ut sem viverra aliquet eget sit amet. Lacus
-                        luctus accumsan tortor posuere ac ut consequat semper
-                        viverra. Viverra accumsan in nisl nisi scelerisque eu
-                        ultrices. In massa tempor nec feugiat nisl pretium
-                        fusce.
-                    </p>
-                </div>
+                <h2 class="section-title">{t("about.section.presentation")}</h2>
+                <p>{t("about.section.presentation.text")}</p>
             </section>
             <section>
                 <h2 class="section-title">{t("about.section.education")}</h2>
-                <div class="content">
-                    <p>Corporis voluptates tenetur laudantium.</p>
-                </div>
+                <ul>
+                    <li>
+                        <p>
+                            BUT informatique - IUT Robert Schuman - Strasbourg <br
+                            />
+                            2023-2026
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Baccalauréat en génie logiciel - Ecole de
+                            Technologie Supérieur (ETS) - Montréal <br /> 2025-2026
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Licence informatique - Faculté de Strasbourg <br /> 2026-2027
+                        </p>
+                    </li>
+                </ul>
             </section>
             <section>
                 <h2 class="section-title">{t("about.section.skills")}</h2>
                 <div class="content">
-                    <p>officia unde omnis</p>
+                    <div class="skills-grid">
+                        {
+                            (
+                                Object.keys(competences) as Array<
+                                    keyof typeof competences
+                                >
+                            ).map((category) => (
+                                <div class="skills-category">
+                                    <h3>{competenceLabels[category]}</h3>
+                                    <ul class="skills-list">
+                                        {competences[category].map((skill) => (
+                                            <li>{skill}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
             </section>
         </main>
@@ -105,6 +168,37 @@ const t = useTranslations(lang);
     .content :global(a:hover),
     .content :global(a:focus) {
         text-decoration-color: currentColor;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .skills-category h3 {
+        font-size: var(--text-md);
+        color: var(--accent-regular);
+        margin-bottom: 0.5rem;
+    }
+
+    .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .skills-list li {
+        font-size: var(--text-sm);
+        color: var(--gray-200);
+        background-color: var(--gray-900, rgba(255, 255, 255, 0.05));
+        border: 1px solid var(--gray-800, rgba(255, 255, 255, 0.1));
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.65rem;
     }
 
     @media (min-width: 50em) {
