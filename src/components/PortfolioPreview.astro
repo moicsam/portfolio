@@ -1,20 +1,51 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { useTranslations } from "../i18n/utils";
 
 interface Props {
     project: CollectionEntry<"work">;
 }
 
 const { data, id } = Astro.props.project;
+const t = useTranslations(data.lang);
 // `id` looks like "fr/bloom-box" or "en/nested/duvet-genius" — strip the
 // leading lang segment since the route already carries the lang prefix.
 const slug = id.replace(/^(fr|en)\//, "");
 const base = import.meta.env.BASE_URL;
+
+// Format date range and duration
+const formatDate = (date: Date) => {
+    return date.toLocaleDateString(data.lang, {
+        year: "numeric",
+        month: "short",
+    });
+};
+
+const startDate = new Date(data.startDate);
+const endDate = data.endDate ? new Date(data.endDate) : null;
+const dateRange = endDate
+    ? `${formatDate(startDate)} – ${formatDate(endDate)}`
+    : `${formatDate(startDate)}`;
+
+// Calculate duration in months
+const durationMonths = endDate
+    ? Math.round(
+          (endDate.getTime() - startDate.getTime()) /
+              (1000 * 60 * 60 * 24 * 30),
+      )
+    : null;
 ---
 
 <a class="card" href={`${base}/${data.lang}/work/${slug}/`}>
     <div class="content">
         <h3 class="title">{data.title}</h3>
+        <p class="date">
+            {dateRange}{
+                durationMonths
+                    ? ` (${durationMonths} ${durationMonths > 1 ? t("months") : t("month")})`
+                    : ""
+            }
+        </p>
         <p class="description">{data.description}</p>
     </div>
 </a>
@@ -49,6 +80,14 @@ const base = import.meta.env.BASE_URL;
         font-size: var(--text-lg);
         font-weight: 600;
         color: var(--accent-regular);
+    }
+
+    .date {
+        margin: 0;
+        padding: 0;
+        font-size: var(--text-xs);
+        color: var(--gray-600);
+        font-style: italic;
     }
 
     .description {

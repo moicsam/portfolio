@@ -1,6 +1,7 @@
 ---
 title: Coolang
-publishDate: 2026-08-03
+startDate: 2025-12-12
+endDate: 2025-12-20
 description:  
   A 10-day hackathon where we had to design a programming language and build a game with it.
 tags:

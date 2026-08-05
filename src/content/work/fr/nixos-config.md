@@ -1,6 +1,6 @@
 ---
 title: NixOS Config
-publishDate: 2026-08-03
+startDate: 2026-04-01
 description:  
   Configuration NixOS versionnée et reproductible.
 tags:

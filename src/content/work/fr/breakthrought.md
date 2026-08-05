@@ -1,6 +1,7 @@
 ---
 title: BreakThrough
-publishDate: 2026-08-03
+startDate: 2026-03-01
+endDate: 2026-04-30
 description: |
   Création d'un Bot utilisant l'algorithme Min Max pour le jeu de plateau breakthrough.
 tags:

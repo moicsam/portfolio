@@ -1,6 +1,7 @@
 ---
 title: Internship at Icube
-publishDate: 2026-08-03 00:00:00
+startDate: 2025-04-01
+endDate: 2025-06-23
 description:
   Internship carried out at the Icube research lab for the company Viso Rando, during my second year of BUT.
 tags:

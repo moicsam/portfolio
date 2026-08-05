@@ -1,6 +1,7 @@
 ---
 title: CantelCox
-publishDate: 2026-08-03
+startDate: 2026-05-01
+endDate: 2026-07-30
 description:  
   Simulation d'un opérateur mobile canadien fictif déployant une architecture BSS moderne pour les abonnés particuliers et PME, couvrant le cycle de vie des lignes mobiles.
 tags:

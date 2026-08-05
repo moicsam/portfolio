@@ -1,8 +1,9 @@
 ---
 title: Coolang
-publishDate: 2026-08-03
+startDate: 2025-12-12
+endDate: 2025-12-20
 description:  
-  Hackathon de 10 jours où nous devions concevoir un langage de programmation et créer un jeu avec ce nouveau langage.
+  Hackathon de 7 jours où nous devions concevoir un langage de programmation et créer un jeu avec ce nouveau langage.
 tags:
   - Game jam
   - Langage

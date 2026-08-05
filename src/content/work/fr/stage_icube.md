@@ -1,6 +1,7 @@
 ---
 title: Stage à Icube
-publishDate: 2026-08-03 00:00:00
+startDate: 2025-04-01
+endDate: 2025-06-23
 description:
   Stage effectué au laboratoire de recherche Icube pour l'entreprise Viso Rando, lors de ma deuxième année de BUT.
 tags:

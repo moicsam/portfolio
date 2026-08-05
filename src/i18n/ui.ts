@@ -35,7 +35,9 @@ export const ui = {
 		'work.hero.title': 'Mes projets',
 		'work.hero.tagline':
 			"Découvrez ci-dessous mes projets les plus récents pour avoir un aperçu de mon expérience.",
-		'work.detail.back': 'Projets',
+		            'work.detail.back': 'Projets',
+		            'month': 'mois',
+		            'months': 'mois',
 
 		'about.title': 'À propos | Sam KB',
 		'about.description': 'À propos de Sam',
@@ -94,7 +96,9 @@ export const ui = {
 		'work.hero.title': 'My Projects',
 		'work.hero.tagline':
 			'Take a look below at my most recent projects to get an idea of my experience.',
-		'work.detail.back': 'Projects',
+		            'work.detail.back': 'Projects',
+		            'month': 'month',
+		            'months': 'months',
 
 		'about.title': 'About | Sam KB',
 		'about.description': 'About Sam',

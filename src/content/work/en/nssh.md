@@ -1,6 +1,7 @@
 ---
 title: NSSH (Not Secure SHell)
-publishDate: 2026-08-03
+startDate: 2025-04-14
+endDate: 2025-06-10
 description:  
   An insecure version of SSH, implemented in Rust to learn cryptography.
 tags:
