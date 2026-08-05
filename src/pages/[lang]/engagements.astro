@@ -76,25 +76,31 @@ const scientificClubs = {
                 <p>{t("engagements.section.student_associations.text")}</p>
 
                 <div class="content">
-                    <div class="associations-grid">
-                        <div class="association-category">
-                            <h3>{t("engagements.associations")}</h3>
-                            <ul class="association-list">
+                    <div class="category-grid">
+                        <div class="category">
+                            <h3 class="category-title">
+                                {t("engagements.associations")}
+                            </h3>
+                            <ul class="item-list">
                                 {
                                     studentAssociations.social.map(
                                         (association) => (
                                             <li>
-                                                <div class="association-item">
-                                                    <h4>{association.name}</h4>
-                                                    <p class="role">
-                                                        {association.role} -{" "}
-                                                        {association.period}
-                                                    </p>
-                                                    <p>
-                                                        {
-                                                            association.description
-                                                        }
-                                                    </p>
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <h4 class="title">
+                                                            {association.name}
+                                                        </h4>
+                                                        <p class="role">
+                                                            {association.role} -{" "}
+                                                            {association.period}
+                                                        </p>
+                                                        <p class="description">
+                                                            {
+                                                                association.description
+                                                            }
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </li>
                                         ),
@@ -103,26 +109,30 @@ const scientificClubs = {
                             </ul>
                         </div>
 
-                        <div class="association-category">
-                            <h3>
+                        <div class="category">
+                            <h3 class="category-title">
                                 {t("engagements.representation")}
                             </h3>
-                            <ul class="association-list">
+                            <ul class="item-list">
                                 {
                                     studentAssociations.representation.map(
                                         (association) => (
                                             <li>
-                                                <div class="association-item">
-                                                    <h4>{association.name}</h4>
-                                                    <p class="role">
-                                                        {association.role} -{" "}
-                                                        {association.period}
-                                                    </p>
-                                                    <p>
-                                                        {
-                                                            association.description
-                                                        }
-                                                    </p>
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <h4 class="title">
+                                                            {association.name}
+                                                        </h4>
+                                                        <p class="role">
+                                                            {association.role} -{" "}
+                                                            {association.period}
+                                                        </p>
+                                                        <p class="description">
+                                                            {
+                                                                association.description
+                                                            }
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </li>
                                         ),
@@ -141,19 +151,28 @@ const scientificClubs = {
                 <p>{t("engagements.section.scientific_clubs.text")}</p>
 
                 <div class="content">
-                    <div class="clubs-grid">
-                        <div class="club-category">
-                            <h3>{t("engagements.clubs.scientific")}</h3>
-                            <ul class="club-list">
+                    <div class="category-grid">
+                        <div class="category">
+                            <h3 class="category-title">
+                                {t("engagements.clubs.scientific")}
+                            </h3>
+                            <ul class="item-list">
                                 {
                                     scientificClubs.clubs.map((club) => (
                                         <li>
-                                            <div class="club-item">
-                                                <h4>{club.name}</h4>
-                                                <p class="role">
-                                                    {club.role} - {club.period}
-                                                </p>
-                                                <p>{club.description}</p>
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <h4 class="title">
+                                                        {club.name}
+                                                    </h4>
+                                                    <p class="role">
+                                                        {club.role} -{" "}
+                                                        {club.period}
+                                                    </p>
+                                                    <p class="description">
+                                                        {club.description}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </li>
                                     ))
@@ -161,19 +180,27 @@ const scientificClubs = {
                             </ul>
                         </div>
 
-                        <div class="club-category">
-                            <h3>{t("engagements.clubs.projects")}</h3>
-                            <ul class="club-list">
+                        <div class="category">
+                            <h3 class="category-title">
+                                {t("engagements.clubs.projects")}
+                            </h3>
+                            <ul class="item-list">
                                 {
                                     scientificClubs.projects.map((project) => (
                                         <li>
-                                            <div class="club-item">
-                                                <h4>{project.name}</h4>
-                                                <p class="role">
-                                                    {project.role} -{" "}
-                                                    {project.period}
-                                                </p>
-                                                <p>{project.description}</p>
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <h4 class="title">
+                                                        {project.name}
+                                                    </h4>
+                                                    <p class="role">
+                                                        {project.role} -{" "}
+                                                        {project.period}
+                                                    </p>
+                                                    <p class="description">
+                                                        {project.description}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </li>
                                     ))
@@ -213,16 +240,14 @@ const scientificClubs = {
         grid-column: 2 / 4;
     }
 
-    .associations-grid,
-    .clubs-grid {
+    .category-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 2rem;
         margin-top: 1rem;
     }
 
-    .association-category h3,
-    .club-category h3 {
+    .category-title {
         font-size: var(--text-md);
         color: var(--accent-regular);
         margin-bottom: 1rem;
@@ -230,8 +255,7 @@ const scientificClubs = {
         padding-bottom: 0.5rem;
     }
 
-    .association-list,
-    .club-list {
+    .item-list {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -240,44 +264,53 @@ const scientificClubs = {
         margin: 0;
     }
 
-    .association-item,
-    .club-item {
-        background-color: var(--gray-100);
+    .card {
+        display: block;
+        background: var(--gray-100);
         border: 1px solid var(--gray-200);
         border-radius: 0.75rem;
-        padding: 1.5rem;
         box-shadow: var(--shadow-sm);
+        text-decoration: none;
+        color: var(--gray-900);
         transition:
             transform 0.2s ease,
             box-shadow 0.2s ease;
+        padding: 1.5rem;
     }
 
-    .association-item:hover,
-    .club-item:hover {
+    .card:hover {
         transform: translateY(-2px);
         box-shadow: var(--shadow-md);
     }
 
-    .association-item h4,
-    .club-item h4 {
-        margin: 0 0 0.5rem 0;
-        color: var(--accent-regular);
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        height: 100%;
+    }
+
+    .title {
+        margin: 0;
+        padding: 0;
         font-size: var(--text-lg);
         font-weight: 600;
+        color: var(--accent-regular);
     }
 
     .role {
-        margin: 0 0 0.5rem 0;
+        margin: 0;
+        padding: 0;
         font-size: var(--text-xs);
         color: var(--gray-500);
         font-style: italic;
     }
 
-    .association-item p:last-child,
-    .club-item p:last-child {
+    .description {
         margin: 0;
+        padding: 0;
+        font-size: var(--text-sm);
         color: var(--gray-600);
-        line-height: 1.5;
     }
 
     @media (min-width: 50em) {
@@ -295,19 +328,15 @@ const scientificClubs = {
             font-size: var(--text-lg);
         }
 
-        .association-item,
-        .club-item {
+        .card {
             border-radius: 1.5rem;
-            padding: 1.5rem;
         }
 
-        .association-item h4,
-        .club-item h4 {
+        .title {
             font-size: var(--text-xl);
         }
 
-        .association-item p:last-child,
-        .club-item p:last-child {
+        .description {
             font-size: var(--text-base);
         }
     }
