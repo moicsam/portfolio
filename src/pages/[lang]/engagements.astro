@@ -1,0 +1,297 @@
+---
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { languages } from "../../i18n/ui";
+import { useTranslations, type Lang } from "../../i18n/utils";
+
+export function getStaticPaths() {
+    return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Lang };
+const t = useTranslations(lang);
+
+// Données pour les associations étudiantes
+const studentAssociations = {
+    social: [
+        {
+            name: "Amicale CORE",
+            description: t("engagements.core.description"),
+            role: t("engagements.core.role"),
+            period: "2024-2025",
+        },
+    ],
+    representation: [
+        {
+            name: "Unistra",
+            description: t("engagements.unistra.description"),
+            role: t("engagements.unistra.role"),
+            period: "2025-2026",
+        },
+    ],
+};
+
+// Données pour les clubs scientifiques
+const scientificClubs = {
+    clubs: [
+        {
+            name: "Club Capra",
+            description: t("engagements.capra.description"),
+            role: t("engagements.capra.role"),
+            period: "2023-2025",
+        },
+    ],
+    projects: [
+        {
+            name: t("engagements.capra.projects.vtx"),
+            description: t("engagements.capra.projects.vtx.description"),
+            role: t("engagements.capra.projects.vtx.role"),
+            period: "2024-2025",
+        },
+        {
+            name: t("engagements.capra.projects.lte"),
+            description: t("engagements.capra.projects.lte.description"),
+            role: t("engagements.capra.projects.lte.role"),
+            period: "2025-2026",
+        },
+    ],
+};
+---
+
+<BaseLayout
+    title={t("engagements.title")}
+    description={t("engagements.description")}
+>
+    <div class="stack gap-20">
+        <main class="wrapper engagements">
+            <Hero
+                title={t("engagements.hero.title")}
+                tagline={t("engagements.hero.tagline")}
+            />
+            <section>
+                <h2 class="section-title">
+                    {t("engagements.section.student_associations")}
+                </h2>
+                <p>{t("engagements.section.student_associations.text")}</p>
+
+                <div class="content">
+                    <div class="associations-grid">
+                        <div class="association-category">
+                            <h3>{t("engagements.associations")}</h3>
+                            <ul class="association-list">
+                                {
+                                    studentAssociations.social.map(
+                                        (association) => (
+                                            <li>
+                                                <div class="association-item">
+                                                    <h4>{association.name}</h4>
+                                                    <p class="role">
+                                                        {association.role} -{" "}
+                                                        {association.period}
+                                                    </p>
+                                                    <p>
+                                                        {
+                                                            association.description
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        ),
+                                    )
+                                }
+                            </ul>
+                        </div>
+
+                        <div class="association-category">
+                            <h3>
+                                {t("engagements.representation")}
+                            </h3>
+                            <ul class="association-list">
+                                {
+                                    studentAssociations.representation.map(
+                                        (association) => (
+                                            <li>
+                                                <div class="association-item">
+                                                    <h4>{association.name}</h4>
+                                                    <p class="role">
+                                                        {association.role} -{" "}
+                                                        {association.period}
+                                                    </p>
+                                                    <p>
+                                                        {
+                                                            association.description
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        ),
+                                    )
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">
+                    {t("engagements.section.scientific_clubs")}
+                </h2>
+                <p>{t("engagements.section.scientific_clubs.text")}</p>
+
+                <div class="content">
+                    <div class="clubs-grid">
+                        <div class="club-category">
+                            <h3>{t("engagements.clubs.scientific")}</h3>
+                            <ul class="club-list">
+                                {
+                                    scientificClubs.clubs.map((club) => (
+                                        <li>
+                                            <div class="club-item">
+                                                <h4>{club.name}</h4>
+                                                <p class="role">
+                                                    {club.role} - {club.period}
+                                                </p>
+                                                <p>{club.description}</p>
+                                            </div>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+
+                        <div class="club-category">
+                            <h3>{t("engagements.clubs.projects")}</h3>
+                            <ul class="club-list">
+                                {
+                                    scientificClubs.projects.map((project) => (
+                                        <li>
+                                            <div class="club-item">
+                                                <h4>{project.name}</h4>
+                                                <p class="role">
+                                                    {project.role} -{" "}
+                                                    {project.period}
+                                                </p>
+                                                <p>{project.description}</p>
+                                            </div>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <ContactCTA />
+    </div>
+</BaseLayout>
+
+<style>
+    .engagements {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        color: var(--gray-500);
+    }
+
+    .section-title {
+        grid-column-start: 1;
+        font-size: var(--text-xl);
+        color: var(--accent-regular);
+    }
+
+    .content {
+        grid-column: 2 / 4;
+    }
+
+    .associations-grid,
+    .clubs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .association-category h3,
+    .club-category h3 {
+        font-size: var(--text-md);
+        color: var(--accent-regular);
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--accent-regular);
+        padding-bottom: 0.5rem;
+    }
+
+    .association-list,
+    .club-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .association-item,
+    .club-item {
+        background-color: var(--gray-900, rgba(255, 255, 255, 0.05));
+        border: 1px solid var(--gray-800, rgba(255, 255, 255, 0.1));
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .association-item:hover,
+    .club-item:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .association-item h4,
+    .club-item h4 {
+        margin: 0 0 0.5rem 0;
+        color: var(--gray-0);
+        font-size: var(--text-md);
+    }
+
+    .role {
+        font-size: var(--text-sm);
+        color: var(--gray-300);
+        margin-bottom: 0.75rem;
+        font-style: italic;
+    }
+
+    .association-item p,
+    .club-item p {
+        margin: 0;
+        color: var(--gray-200);
+        line-height: 1.5;
+    }
+
+    @media (min-width: 50em) {
+        .engagements {
+            display: grid;
+            grid-template-columns: 1fr 60% 1fr;
+        }
+
+        .engagements > :global(:first-child) {
+            grid-column-start: 2;
+        }
+
+        section {
+            display: contents;
+            font-size: var(--text-lg);
+        }
+    }
+</style>

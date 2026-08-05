@@ -6,8 +6,8 @@
 
 ## MUST
 
-- [ ] ajouter des dates au projets
-- [ ] parler de mes engagement étudiants -> nouvelle page spécifique
+- [x] ajouter des dates au projets
+- [x] parler de mes engagement étudiants -> nouvelle page spécifique
 
 ## SHOUD
 
