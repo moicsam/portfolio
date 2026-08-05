@@ -242,8 +242,8 @@ const scientificClubs = {
 
     .association-item,
     .club-item {
-        background-color: var(--gray-900, rgba(255, 255, 255, 0.05));
-        border: 1px solid var(--gray-800, rgba(255, 255, 255, 0.1));
+        background-color: var(--gray-100);
+        border: 1px solid var(--gray-200);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: var(--shadow-sm);
@@ -261,21 +261,22 @@ const scientificClubs = {
     .association-item h4,
     .club-item h4 {
         margin: 0 0 0.5rem 0;
-        color: var(--gray-0);
-        font-size: var(--text-md);
+        color: var(--accent-regular);
+        font-size: var(--text-lg);
+        font-weight: 600;
     }
 
     .role {
-        font-size: var(--text-sm);
-        color: var(--gray-300);
-        margin-bottom: 0.75rem;
+        margin: 0 0 0.5rem 0;
+        font-size: var(--text-xs);
+        color: var(--gray-500);
         font-style: italic;
     }
 
-    .association-item p,
-    .club-item p {
+    .association-item p:last-child,
+    .club-item p:last-child {
         margin: 0;
-        color: var(--gray-200);
+        color: var(--gray-600);
         line-height: 1.5;
     }
 
@@ -292,6 +293,22 @@ const scientificClubs = {
         section {
             display: contents;
             font-size: var(--text-lg);
+        }
+
+        .association-item,
+        .club-item {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .association-item h4,
+        .club-item h4 {
+            font-size: var(--text-xl);
+        }
+
+        .association-item p:last-child,
+        .club-item p:last-child {
+            font-size: var(--text-base);
         }
     }
 </style>
