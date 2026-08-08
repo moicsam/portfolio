@@ -75,7 +75,70 @@ const competenceLabels: Record<keyof typeof competences, string> = {
             />
             <section>
                 <h2 class="section-title">{t("about.section.presentation")}</h2>
-                <p>{t("about.section.presentation.text")}</p>
+                <p>
+                    {t("about.section.presentation.intro")}
+                    <br />
+                    <br />
+                    {t("about.section.presentation.values")}
+                    <br />
+                    <br />
+                    {t("about.section.presentation.parcours.A1A2")}
+                    <br />
+                    <br />
+                    {t("about.section.presentation.parcours.stage")}
+                    <br />
+                    <br />
+                    {t("about.section.presentation.parcours.ETS")}
+                    <br />
+                    <br />
+                    {t("about.section.presentation.action")}
+                </p>
+            </section>
+            <section>
+                <h2 class="section-title">{t("about.section.education")}</h2>
+                <ul>
+                    <li>
+                        <p>
+                            BUT informatique - IUT Robert Schuman - Strasbourg <br
+                            />
+                            2023-2026
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Baccalauréat en génie logiciel - Ecole de
+                            Technologie Supérieur (ETS) - Montréal <br /> 2025-2026
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Licence informatique - Faculté de Strasbourg <br /> 2026-2027
+                        </p>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2 class="section-title">{t("about.section.skills")}</h2>
+                <div class="content">
+                    <div class="skills-grid">
+                        {
+                            (
+                                Object.keys(competences) as Array<
+                                    keyof typeof competences
+                                >
+                            ).map((category) => (
+                                <div class="skills-category">
+                                    <h3>{competenceLabels[category]}</h3>
+                                    <ul class="skills-list">
+                                        {competences[category].map((skill) => (
+                                            <li>{skill}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
             </section>
             <section>
                 <h2 class="section-title">{t("about.section.education")}</h2>
