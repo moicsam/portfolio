@@ -1,4 +1,5 @@
 ---
+import { getCollection, render } from "astro:content";
 import ContactCTA from "../../components/ContactCTA.astro";
 import Hero from "../../components/Hero.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -11,6 +12,16 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params as { lang: Lang };
 const t = useTranslations(lang);
+
+// Get presentation content
+const presentation = await getCollection(
+    "presentation",
+    ({ data }) => data.lang === lang,
+);
+const { Content } =
+    presentation.length > 0
+        ? await render(presentation[0])
+        : { Content: () => null };
 
 const competences = {
     languages: [
@@ -75,69 +86,8 @@ const competenceLabels: Record<keyof typeof competences, string> = {
             />
             <section>
                 <h2 class="section-title">{t("about.section.presentation")}</h2>
-                <p>
-                    {t("about.section.presentation.intro")}
-                    <br />
-                    <br />
-                    {t("about.section.presentation.values")}
-                    <br />
-                    <br />
-                    {t("about.section.presentation.parcours.A1A2")}
-                    <br />
-                    <br />
-                    {t("about.section.presentation.parcours.stage")}
-                    <br />
-                    <br />
-                    {t("about.section.presentation.parcours.ETS")}
-                    <br />
-                    <br />
-                    {t("about.section.presentation.action")}
-                </p>
-            </section>
-            <section>
-                <h2 class="section-title">{t("about.section.education")}</h2>
-                <ul>
-                    <li>
-                        <p>
-                            BUT informatique - IUT Robert Schuman - Strasbourg <br
-                            />
-                            2023-2026
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Baccalauréat en génie logiciel - Ecole de
-                            Technologie Supérieur (ETS) - Montréal <br /> 2025-2026
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Licence informatique - Faculté de Strasbourg <br /> 2026-2027
-                        </p>
-                    </li>
-                </ul>
-            </section>
-            <section>
-                <h2 class="section-title">{t("about.section.skills")}</h2>
-                <div class="content">
-                    <div class="skills-grid">
-                        {
-                            (
-                                Object.keys(competences) as Array<
-                                    keyof typeof competences
-                                >
-                            ).map((category) => (
-                                <div class="skills-category">
-                                    <h3>{competenceLabels[category]}</h3>
-                                    <ul class="skills-list">
-                                        {competences[category].map((skill) => (
-                                            <li>{skill}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))
-                        }
-                    </div>
+                <div class="presentation-content">
+                    <Content />
                 </div>
             </section>
             <section>
@@ -262,6 +212,14 @@ const competenceLabels: Record<keyof typeof competences, string> = {
         border-radius: 0.5rem;
         padding: 0.25rem 0.65rem;
         font-weight: 500;
+    }
+
+    .presentation-content {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
     }
 
     @media (min-width: 50em) {
